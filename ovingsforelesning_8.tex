@@ -1,0 +1,353 @@
+\documentclass[14pt]{beamer}
+
+\usetheme[subsectionpage=progressbar]{metropolis}
+\setbeamertemplate{section in toc}[sections numbered]
+
+% Indent the subsections in the toc a bit more
+\setbeamertemplate{subsection in toc}
+{\leavevmode\leftskip=3em\rlap{\hskip-2em$\quad$\inserttocsectionnumber.\inserttocsubsectionnumber}$\quad$\inserttocsubsection\par}
+
+\title{Øvingsforelesning 8: Traversering av grafer}
+\subtitle{TDT4120 Algoritmer og datastrukturer}
+
+\date{22. oktober 2019}
+\author{Fredrik Strupe}
+\institute{NTNU}
+
+\begin{document}
+
+\maketitle
+\begin{frame}
+    \frametitle{Plan}
+    \tableofcontents
+\end{frame}
+
+\section{Gjennomgang av øving 7}
+\begin{frame}{First Frame}
+    Hello, world!
+\end{frame}
+
+\section{Denne ukens pensum}
+\begin{frame}[standout]
+    Pensum: Kap. 22.1-22.4
+\end{frame}
+
+\subsection{Representasjon av grafer}
+\begin{frame}{Representasjon av grafer}
+    \centering
+
+    \pause
+
+    Gitt følgende graf:
+
+    \begin{tikzpicture}
+        \node[shape=circle,draw=black] (1) at (0,2) {1};
+        \node[shape=circle,draw=black] (2) at (2,2) {2};
+        \node[shape=circle,draw=black] (3) at (4,2) {3};
+        \node[shape=circle,draw=black] (4) at (0,0) {4};
+        \node[shape=circle,draw=black] (5) at (2,0) {5};
+
+        \path [-] (1) edge node[left] {} (4);
+        \path [-] (2) edge node[left] {} (3);
+        \path [-] (2) edge node[left] {} (4);
+        \path [-] (2) edge node[left] {} (5);
+        \path [-] (3) edge node[left] {} (2);
+        \path [-] (4) edge node[left] {} (1);
+        \path [-] (4) edge node[left] {} (2);
+        \path [-] (5) edge node[left] {} (2);
+    \end{tikzpicture}
+
+    \pause
+
+    Hvordan kan vi representere grafen på en mer maskinvennlig måte?
+\end{frame}
+\begin{frame}{Representasjon av grafer}
+    Hovedsakelig to måter:
+
+    \begin{enumerate}
+        \item<2->Som nabolister
+        \item<3->Som nabomatrise
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Nabolister}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \begin{tikzpicture}
+                \only<1>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
+                \only<2>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
+                \only<3->{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+
+                \only<-3>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
+                \only<4>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
+                \only<5->{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+
+                \only<-5>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
+                \only<6>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
+                \only<7->{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+
+                \only<-7>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
+                \only<8>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
+                \only<9->{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+
+                \only<-9>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
+                \only<10>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
+                \only<11->{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+
+                \path [-] (1) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (3);
+                \path [-] (2) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (5);
+                \path [-] (3) edge node[left] {} (2);
+                \path [-] (4) edge node[left] {} (1);
+                \path [-] (4) edge node[left] {} (2);
+                \path [-] (5) edge node[left] {} (2);
+            \end{tikzpicture}
+        \column{0.5\textwidth}
+            $1 \rightarrow \begin{bmatrix}\alt<3->{4}{~}\end{bmatrix}$\\
+            $2 \rightarrow \begin{bmatrix}\alt<5->{3&4&5}{~}\end{bmatrix}$\\
+            $3 \rightarrow \begin{bmatrix}\alt<7->{2}{~}\end{bmatrix}$\\
+            $4 \rightarrow \begin{bmatrix}\alt<9->{1&2}{~}\end{bmatrix}$\\
+            $5 \rightarrow \begin{bmatrix}\alt<11->{2}{~}\end{bmatrix}$\\
+    \end{columns}
+\end{frame}
+\begin{frame}{Nabomatrise}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \begin{tikzpicture}
+                \only<1>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
+                \only<2>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
+                \only<3->{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+
+                \only<-3>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
+                \only<4>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
+                \only<5->{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+
+                \only<-5>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
+                \only<6>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
+                \only<7->{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+
+                \only<-7>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
+                \only<8>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
+                \only<9->{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+
+                \only<-9>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
+                \only<10>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
+                \only<11->{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+
+                \path [-] (1) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (3);
+                \path [-] (2) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (5);
+                \path [-] (3) edge node[left] {} (2);
+                \path [-] (4) edge node[left] {} (1);
+                \path [-] (4) edge node[left] {} (2);
+                \path [-] (5) edge node[left] {} (2);
+            \end{tikzpicture}
+        \column{0.5\textwidth}
+            \begin{math}
+                \begin{array}{c c} &
+                \begin{array}{c c c c c} 1 & 2 & 3 & 4 & 5 \\
+                \end{array}
+                \\
+                \begin{array}{c c c c c}
+                1 \\ 2 \\ 3 \\ 4 \\ 5
+                \end{array}
+                &
+                \left[
+                \begin{array}{c c c c c}
+                0 & 0 & 0 & \alt<3->{1}{0} & 0 \\
+                0 & 0 & \alt<5->{1}{0} & \alt<5->{1}{0} & \alt<5->{1}{0} \\
+                0 & \alt<5->{1}{0} & 0 & 0 & 0 \\
+                \alt<3->{1}{0} & \alt<5->{1}{0} & 0 & 0 & 0 \\
+                0 & \alt<5->{1}{0} & 0 & 0 & 0 \\
+                \end{array}
+                \right]
+                \end{array}
+            \end{math}
+    \end{columns}
+\end{frame}
+
+\subsection{Bredde-først-søk}
+\begin{frame}{Bredde-først-søk}
+    Bredde-først-søk (BFS) er en algortime for å traversere grafer, som vil si å besøke noder i en viss rekkefølge.
+
+    \pause
+
+    Den "søker i bredden" ved å plassere noder i en kø, som den deretter velger fra.
+\end{frame}
+\begin{frame}{Bredde-først-søk}
+    BFS fungerer omtrent slik:
+
+    \begin{enumerate}
+        \setcounter{enumi}{-1}
+        \item<2-> Velg en startnode og legg denne inn i en kø.
+        \item<3-> Hent ut noden som er fremst i køen.
+        \item<4-> Legg til nodens naboer (som ikke allerede er besøkt eller i køen) bakerst i køen, og farg noden svart.
+        \item<5-> Gjenta (gå til 1) til køen er tom.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Bredde-først-søk}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \begin{tikzpicture}
+                \only<-7>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
+                \only<8-10>{\node[shape=circle,draw=black,fill=lightgray]} (1) at (0,2) {1};
+                \only<11>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
+                \only<12->{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+
+                \only<-3>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
+                \only<4>{\node[shape=circle,draw=black,fill=lightgray]} (2) at (2,2) {2};
+                \only<5>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
+                \only<6->{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+
+                \only<1>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
+                \only<2>{\node[shape=circle,draw=black,fill=lightgray]} (3) at (4,2) {3};
+                \only<3>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
+                \only<4->{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+
+                \only<-5>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
+                \only<6>{\node[shape=circle,draw=black,fill=lightgray]} (4) at (0,0) {4};
+                \only<7>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
+                \only<8->{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+
+                \only<-5>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
+                \only<6-8>{\node[shape=circle,draw=black,fill=lightgray]} (5) at (2,0) {5};
+                \only<9>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
+                \only<10->{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+
+                \path [-] (1) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (3);
+                \path [-] (2) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (5);
+                \path [-] (3) edge node[left] {} (2);
+                \path [-] (4) edge node[left] {} (1);
+                \path [-] (4) edge node[left] {} (2);
+                \path [-] (5) edge node[left] {} (2);
+            \end{tikzpicture}
+        \column{0.5\textwidth}
+        Nodekø:
+        \begin{math}
+            \only<2>{3}
+            \only<4>{2}
+            \only<6>{4,5}
+            \only<7>{5}
+            \only<8>{5,1}
+            \only<9-10>{1}
+            \only<11->{}
+        \end{math}
+
+        \\~\\
+
+        Besøkt: $\only<3->{3} \only<5->{,2} \only<7->{,4} \only<9->{,5} \only<11->{,1}$
+
+        Farget svart: $\only<4->{3} \only<6->{,2} \only<8->{,4} \only<10->{,5} \only<12->{, 1}$
+
+        \begin{alertblock}
+            \only<13->{Merk at besøkt = farget svart}
+        \end{alertblock}
+
+    \end{columns}
+\end{frame}
+
+\subsection{Dybde-først-søk}
+\begin{frame}{Dybde-først-søk}
+    Dybde-først-søk (DFS) er også en algoritme for graftraversering, og er relativt lik BFS.
+
+    \pause
+
+    Det er to hovedforskjeller mellom BFS og DFS:
+
+    \begin{enumerate}
+        \item<3-> DFS "søker i dybden" ved å alltid velge den \textit{bakerste} noden i køen, istedenfor den fremste. Den bruker altså en stakk istedenfor en (LIFO-)kø.
+        \item<4-> Dersom stakken er tom, velger den (vilkårlig) en ny node dersom ikke alle nodene er blitt besøkt.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Dybde-først-søk}
+    DFS fungerer omtrent slik:
+
+    \begin{enumerate}
+        \setcounter{enumi}{-1}
+        \item<2-> Velg en startnode og legg denne på en stakk.
+        \item<3-> Hent ut noden som er på toppen av stakken.
+        \item<4-> Legg til nodens ubesøkte naboer på toppen av stakken, og farg noden svart \textit{hvis ingen nye naboer ble lagt til i stakken}.
+        \item<5-> Gjenta (gå til 1) til stakken er tom.
+        \item<6-> Gjenta (gå til 0) til alle nodene er besøkt.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Dybde-først-søk}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \begin{tikzpicture}
+                \only<>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
+                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (1) at (0,2) {1};
+                \only<>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
+                \only<>{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+
+                \only<>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
+                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (2) at (2,2) {2};
+                \only<>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
+                \only<>{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+
+                \only<1>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
+                \only<2>{\node[shape=circle,draw=black,fill=lightgray]} (3) at (4,2) {3};
+                \only<3>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
+                \only<>{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+
+                \only<>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
+                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (4) at (0,0) {4};
+                \only<>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
+                \only<>{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+
+                \only<>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
+                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (5) at (2,0) {5};
+                \only<>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
+                \only<>{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+
+                \only<>{\node[shape=circle,draw=black]} (6) at (4,0) {6};
+                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (6) at (4,0) {6};
+                \only<>{\node[shape=circle,draw=black,fill=gray]} (6) at (4,0) {6};
+                \only<>{\node[shape=circle,draw=black,fill=black]} (6) at (4,0) {6};
+
+                \path [-] (1) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (3);
+                \path [-] (2) edge node[left] {} (4);
+                \path [-] (2) edge node[left] {} (5);
+                \path [-] (3) edge node[left] {} (2);
+                \path [-] (4) edge node[left] {} (1);
+                \path [-] (4) edge node[left] {} (2);
+                \path [-] (5) edge node[left] {} (2);
+            \end{tikzpicture}
+        \column{0.5\textwidth}
+        Nodestakk:
+        \begin{math}
+            \only<2>{3}
+            \only<4>{2}
+            \only<6>{4,5}
+            \only<7>{5}
+            \only<8>{5,1}
+            \only<9-10>{1}
+            \only<11->{}
+        \end{math}
+
+        \\~\\
+
+        Besøkt: $\only<3->{3} \only<5->{,2} \only<7->{,4} \only<9->{,5} \only<11->{,1}$
+
+        Farget svart: $\only<4->{3} \only<6->{,2} \only<8->{,4} \only<10->{,5} \only<12->{, 1}$
+
+        \begin{alertblock}
+            \only<13->{Merk at besøkt = farget svart}
+        \end{alertblock}
+
+    \end{columns}
+\end{frame}
+
+
+\subsection{Topologisk sortering}
+
+
+\section{Tips til øving 8, teori}
+
+\section{Tips til øving 8, praksis}
+
+\end{document}
