@@ -74,24 +74,24 @@
         \column{0.5\textwidth}
             \begin{tikzpicture}
                 \only<1>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
-                \only<2>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
-                \only<3->{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+                \only<2>{\node[shape=circle,draw=black,dashed]} (1) at (0,2) {1};
+                \only<3->{\node[shape=circle,draw=black]} (1) at (0,2) {1};
 
                 \only<-3>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
-                \only<4>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
-                \only<5->{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+                \only<4>{\node[shape=circle,draw=black,dashed]} (2) at (2,2) {2};
+                \only<5->{\node[shape=circle,draw=black]} (2) at (2,2) {2};
 
                 \only<-5>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
-                \only<6>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
-                \only<7->{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+                \only<6>{\node[shape=circle,draw=black,dashed]} (3) at (4,2) {3};
+                \only<7->{\node[shape=circle,draw=black]} (3) at (4,2) {3};
 
                 \only<-7>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
-                \only<8>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
-                \only<9->{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+                \only<8>{\node[shape=circle,draw=black,dashed]} (4) at (0,0) {4};
+                \only<9->{\node[shape=circle,draw=black]} (4) at (0,0) {4};
 
                 \only<-9>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
-                \only<10>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
-                \only<11->{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+                \only<10>{\node[shape=circle,draw=black,dashed]} (5) at (2,0) {5};
+                \only<11->{\node[shape=circle,draw=black]} (5) at (2,0) {5};
 
                 \path [-] (1) edge node[left] {} (4);
                 \path [-] (2) edge node[left] {} (3);
@@ -115,24 +115,24 @@
         \column{0.5\textwidth}
             \begin{tikzpicture}
                 \only<1>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
-                \only<2>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
-                \only<3->{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+                \only<2>{\node[shape=circle,draw=black,dashed]} (1) at (0,2) {1};
+                \only<3->{\node[shape=circle,draw=black]} (1) at (0,2) {1};
 
                 \only<-3>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
-                \only<4>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
-                \only<5->{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+                \only<4>{\node[shape=circle,draw=black,dashed]} (2) at (2,2) {2};
+                \only<5->{\node[shape=circle,draw=black]} (2) at (2,2) {2};
 
                 \only<-5>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
-                \only<6>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
-                \only<7->{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+                \only<6>{\node[shape=circle,draw=black,dashed]} (3) at (4,2) {3};
+                \only<7->{\node[shape=circle,draw=black]} (3) at (4,2) {3};
 
                 \only<-7>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
-                \only<8>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
-                \only<9->{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+                \only<8>{\node[shape=circle,draw=black,dashed]} (4) at (0,0) {4};
+                \only<9->{\node[shape=circle,draw=black]} (4) at (0,0) {4};
 
                 \only<-9>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
-                \only<10>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
-                \only<11->{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+                \only<10>{\node[shape=circle,draw=black,dashed]} (5) at (2,0) {5};
+                \only<11->{\node[shape=circle,draw=black]} (5) at (2,0) {5};
 
                 \path [-] (1) edge node[left] {} (4);
                 \path [-] (2) edge node[left] {} (3);
@@ -192,28 +192,28 @@
             \begin{tikzpicture}
                 \only<-7>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
                 \only<8-10>{\node[shape=circle,draw=black,fill=lightgray]} (1) at (0,2) {1};
-                \only<11>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
-                \only<12->{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+                \only<11>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (1) at (0,2) {1};
+                \only<12->{\node[shape=circle,draw=black,fill=black,text=white]} (1) at (0,2) {1};
 
                 \only<-3>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
                 \only<4>{\node[shape=circle,draw=black,fill=lightgray]} (2) at (2,2) {2};
-                \only<5>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
-                \only<6->{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+                \only<5>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (2) at (2,2) {2};
+                \only<6->{\node[shape=circle,draw=black,fill=black,text=white]} (2) at (2,2) {2};
 
                 \only<1>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
                 \only<2>{\node[shape=circle,draw=black,fill=lightgray]} (3) at (4,2) {3};
-                \only<3>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
-                \only<4->{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+                \only<3>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (3) at (4,2) {3};
+                \only<4->{\node[shape=circle,draw=black,fill=black,text=white]} (3) at (4,2) {3};
 
                 \only<-5>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
                 \only<6>{\node[shape=circle,draw=black,fill=lightgray]} (4) at (0,0) {4};
-                \only<7>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
-                \only<8->{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+                \only<7>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (4) at (0,0) {4};
+                \only<8->{\node[shape=circle,draw=black,fill=black,text=white]} (4) at (0,0) {4};
 
                 \only<-5>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
                 \only<6-8>{\node[shape=circle,draw=black,fill=lightgray]} (5) at (2,0) {5};
-                \only<9>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
-                \only<10->{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+                \only<9>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (5) at (2,0) {5};
+                \only<10->{\node[shape=circle,draw=black,fill=black,text=white]} (5) at (2,0) {5};
 
                 \path [-] (1) edge node[left] {} (4);
                 \path [-] (2) edge node[left] {} (3);
@@ -255,58 +255,71 @@
 
     \pause
 
-    Det er to hovedforskjeller mellom BFS og DFS:
-
-    \begin{enumerate}
-        \item<3-> DFS "søker i dybden" ved å alltid velge den \textit{bakerste} noden i køen, istedenfor den fremste. Den bruker altså en stakk istedenfor en (LIFO-)kø.
-        \item<4-> Dersom stakken er tom, velger den (vilkårlig) en ny node dersom ikke alle nodene er blitt besøkt.
-    \end{enumerate}
+    I motsetning til BFS, kan DFS implementeres både iterativt og rekursivt.
 \end{frame}
 \begin{frame}{Dybde-først-søk}
-    DFS fungerer omtrent slik:
+    Den iterative implementasjonen er nesten helt lik BFS.
 
-    \begin{enumerate}
-        \setcounter{enumi}{-1}
-        \item<2-> Velg en startnode og legg denne på en stakk.
-        \item<3-> Hent ut noden som er på toppen av stakken.
-        \item<4-> Legg til nodens ubesøkte naboer på toppen av stakken, og farg noden svart \textit{hvis ingen nye naboer ble lagt til i stakken}.
-        \item<5-> Gjenta (gå til 1) til stakken er tom.
-        \item<6-> Gjenta (gå til 0) til alle nodene er besøkt.
-    \end{enumerate}
+    \pause
+
+    Hovedforskjellen er at DFS "søker i dybden" ved å alltid velge den \textit{bakerste} noden i køen, istedenfor den fremste.
+
+    \pause
+
+    Den bruker altså en stakk istedenfor en (LIFO-)kø.
+\end{frame}
+\begin{frame}{Dybde-først-søk}
+    \textbf{OBS:} I pensumboka er kun den \textit{rekursive} implementasjonen beskrevet.
+
+    \pause
+
+    Vi kommer derfor til å fokusere på denne her.
+\end{frame}
+\begin{frame}{Dybde-først-søk}
+    Rekursiv DFS fungerer omtrent slik:
+
+%     \begin{enumerate}
+%         \setcounter{enumi}{-1}
+%         \item<2-> Velg en (vilkårlig) startnode.
+%         \item<3-> Farg noden grå.
+%         \item<4-> Legg til nodens ubesøkte naboer på toppen av stakken, og farg noden svart \textit{hvis ingen nye naboer ble lagt til i stakken}.
+%         \item<5-> Gjenta (gå til 1) til stakken er tom.
+%         \item<6-> Gjenta (gå til 0) til alle nodene er besøkt.
+%     \end{enumerate}
 \end{frame}
 \begin{frame}{Dybde-først-søk}
     \begin{columns}
         \column{0.5\textwidth}
             \begin{tikzpicture}
-                \only<>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
-                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (1) at (0,2) {1};
-                \only<>{\node[shape=circle,draw=black,fill=gray]} (1) at (0,2) {1};
-                \only<>{\node[shape=circle,draw=black,fill=black]} (1) at (0,2) {1};
+                \only<-7>{\node[shape=circle,draw=black]} (1) at (0,2) {1};
+                \only<8>{\node[shape=circle,draw=black,fill=lightgray]} (1) at (0,2) {1};
+                \only<9>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (1) at (0,2) {1};
+                \only<10->{\node[shape=circle,draw=black,fill=black,text=white]} (1) at (0,2) {1};
 
-                \only<>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
-                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (2) at (2,2) {2};
-                \only<>{\node[shape=circle,draw=black,fill=gray]} (2) at (2,2) {2};
-                \only<>{\node[shape=circle,draw=black,fill=black]} (2) at (2,2) {2};
+                \only<-3>{\node[shape=circle,draw=black]} (2) at (2,2) {2};
+                \only<4,6-12,14-16>{\node[shape=circle,draw=black,fill=lightgray]} (2) at (2,2) {2};
+                \only<5,13,17>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (2) at (2,2) {2};
+                \only<18->{\node[shape=circle,draw=black,fill=black,text=white]} (2) at (2,2) {2};
 
                 \only<1>{\node[shape=circle,draw=black]} (3) at (4,2) {3};
-                \only<2>{\node[shape=circle,draw=black,fill=lightgray]} (3) at (4,2) {3};
-                \only<3>{\node[shape=circle,draw=black,fill=gray]} (3) at (4,2) {3};
-                \only<>{\node[shape=circle,draw=black,fill=black]} (3) at (4,2) {3};
+                \only<2,4-18>{\node[shape=circle,draw=black,fill=lightgray]} (3) at (4,2) {3};
+                \only<3,19>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (3) at (4,2) {3};
+                \only<20->{\node[shape=circle,draw=black,fill=black,text=white]} (3) at (4,2) {3};
 
-                \only<>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
-                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (4) at (0,0) {4};
-                \only<>{\node[shape=circle,draw=black,fill=gray]} (4) at (0,0) {4};
-                \only<>{\node[shape=circle,draw=black,fill=black]} (4) at (0,0) {4};
+                \only<-5>{\node[shape=circle,draw=black]} (4) at (0,0) {4};
+                \only<6,8-10>{\node[shape=circle,draw=black,fill=lightgray]} (4) at (0,0) {4};
+                \only<7,11>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (4) at (0,0) {4};
+                \only<12->{\node[shape=circle,draw=black,fill=black,text=white]} (4) at (0,0) {4};
 
-                \only<>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
-                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (5) at (2,0) {5};
-                \only<>{\node[shape=circle,draw=black,fill=gray]} (5) at (2,0) {5};
-                \only<>{\node[shape=circle,draw=black,fill=black]} (5) at (2,0) {5};
+                \only<-5>{\node[shape=circle,draw=black]} (5) at (2,0) {5};
+                \only<6-14>{\node[shape=circle,draw=black,fill=lightgray]} (5) at (2,0) {5};
+                \only<15>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (5) at (2,0) {5};
+                \only<16->{\node[shape=circle,draw=black,fill=black,text=white]} (5) at (2,0) {5};
 
-                \only<>{\node[shape=circle,draw=black]} (6) at (4,0) {6};
-                \only<>{\node[shape=circle,draw=black,fill=lightgray]} (6) at (4,0) {6};
-                \only<>{\node[shape=circle,draw=black,fill=gray]} (6) at (4,0) {6};
-                \only<>{\node[shape=circle,draw=black,fill=black]} (6) at (4,0) {6};
+                \only<-20>{\node[shape=circle,draw=black]} (6) at (4,0) {6};
+                \only<21>{\node[shape=circle,draw=black,fill=lightgray]} (6) at (4,0) {6};
+                \only<22>{\node[shape=circle,draw=black,fill=lightgray,dashed]} (6) at (4,0) {6};
+                \only<23->{\node[shape=circle,draw=black,fill=black,text=white]} (6) at (4,0) {6};
 
                 \path [-] (1) edge node[left] {} (4);
                 \path [-] (2) edge node[left] {} (3);
@@ -322,10 +335,10 @@
         \begin{math}
             \only<2>{3}
             \only<4>{2}
-            \only<6>{4,5}
+            \only<6>{5,4}
             \only<7>{5}
-            \only<8>{5,1}
-            \only<9-10>{1}
+            \only<8>{5,2,1}
+            \only<9>{5,2,4}
             \only<11->{}
         \end{math}
 
@@ -344,9 +357,37 @@
 
 
 \subsection{Topologisk sortering}
+\begin{frame}{Topologisk sortering}
+    Topologisk sortering er en måte å ordne/sortere noder i en graf på.
+
+    \pause
+
+    Grafen må være rettet og asyklisk (en \textit{DAG}).
+
+    \pause
+
+    Vi får en topologisk sortering ved å kjøre DFS på grafen og sortere etter når noden ble farget svart.
+\end{frame}
+\begin{frame}{Topologisk sortering}
+    \textbf{Men ...}
+
+    \pause
+
+    ... vi trenger ikke kjøre DFS hvis vi bare skal sjekke om en topologisk sortering er korrekt!
+\end{frame}
+\begin{frame}{Topologisk sortering}
+(Eksempel på hvordan man kan sjekke om en følge er en topologisk sortering)
+\end{frame}
 
 
 \section{Tips til øving 8, teori}
+\begin{frame}{Tips til øving 8, teori}
+    I denne forelesningen gikk vi gjennom BFS og DFS på urettede grafer.
+
+    \pause
+
+    De fungerer helt likt med rettede grafer!
+\end{frame}
 
 \section{Tips til øving 8, praksis}
 
