@@ -3,6 +3,14 @@
 \usetheme[subsectionpage=progressbar]{metropolis}
 \setbeamertemplate{section in toc}[sections numbered]
 
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{matrix}
+
+\usepackage{multicol}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+
 % Indent the subsections in the toc a bit more
 \setbeamertemplate{subsection in toc}
 {\leavevmode\leftskip=3em\rlap{\hskip-2em$\quad$\inserttocsectionnumber.\inserttocsubsectionnumber}$\quad$\inserttocsubsection\par}
@@ -236,8 +244,6 @@
             \only<11->{}
         \end{math}
 
-        \\~\\
-
         Besøkt: $\only<3->{3} \only<5->{,2} \only<7->{,4} \only<9->{,5} \only<11->{,1}$
 
         Farget svart: $\only<4->{3} \only<6->{,2} \only<8->{,4} \only<10->{,5} \only<12->{, 1}$
@@ -342,8 +348,6 @@
             \only<11->{}
         \end{math}
 
-        \\~\\
-
         Besøkt: $\only<3->{3} \only<5->{,2} \only<7->{,4} \only<9->{,5} \only<11->{,1}$
 
         Farget svart: $\only<4->{3} \only<6->{,2} \only<8->{,4} \only<10->{,5} \only<12->{, 1}$
@@ -353,6 +357,9 @@
         \end{alertblock}
 
     \end{columns}
+\end{frame}
+\begin{frame}
+    Noe med kantklassifisering
 \end{frame}
 
 
@@ -374,21 +381,181 @@
     \pause
 
     ... vi trenger ikke kjøre DFS hvis vi bare skal sjekke om en topologisk sortering er korrekt!
+
+    \pause
+
+    For en gyldig topologisk sortering vil alle nodene ha kanter som går mot høyre.
 \end{frame}
 \begin{frame}{Topologisk sortering}
-(Eksempel på hvordan man kan sjekke om en følge er en topologisk sortering)
+    \begin{columns}
+        \column{0.5\textwidth}
+            \begin{tikzpicture}
+                \node[shape=circle,draw=black] (1) at (0,2) {1};
+                \node[shape=circle,draw=black] (2) at (2,2) {2};
+                \node[shape=circle,draw=black] (3) at (4,2) {3};
+                \node[shape=circle,draw=black] (4) at (0,0) {4};
+                \node[shape=circle,draw=black] (5) at (2,0) {5};
+                \node[shape=circle,draw=black] (6) at (4,0) {6};
+
+                \path [-{Latex[length=3mm]},width=2] (2) edge node[left] {} (3);
+                \path [-{Latex[length=3mm]},width=2] (2) edge node[left] {} (4);
+                \path [-{Latex[length=3mm]},width=2] (4) edge node[left] {} (1);
+                \path [-{Latex[length=3mm]},width=2] (5) edge node[left] {} (2);
+            \end{tikzpicture}
+        \column{0.5\textwidth}
+            \onslide<2->{Er $1, 2, 3, 4, 5, 6$ en gyldig topologisk sortering?}
+
+            \onslide<5->{\textcolor{red}{Nei!}}
+    \end{columns}
+    \vfill
+    \centering
+    \onslide<3->{
+        \begin{tikzpicture}
+            \node[shape=circle,draw=black] (1) at (0,0) {1};
+            \node[shape=circle,draw=black] (2) at (2,0) {2};
+            \node[shape=circle,draw=black] (3) at (4,0) {3};
+            \node[shape=circle,draw=black] (4) at (6,0) {4};
+            \node[shape=circle,draw=black] (5) at (8,0) {5};
+            \node[shape=circle,draw=black] (6) at (10,0) {6};
+
+            \onslide<4->{
+                \path[-{Latex[length=3mm]},width=2] (2) edge[bend left] node[left] {} (3);
+                \path[-{Latex[length=3mm]},width=2] (2) edge[bend left] node[left] {} (4);
+                \path[-{Latex[length=3mm]},width=2] (4) edge[bend right] node[left] {} (1);
+                \path<5->[-{Latex[length=3mm]},width=2,color=red] (4) edge[bend right] node[left] {} (1);
+                \path[-{Latex[length=3mm]},width=2] (5) edge[bend left] node[left] {} (2);
+                \path<5->[-{Latex[length=3mm]},width=2,color=red] (5) edge[bend left] node[left] {} (2);
+            }
+        \end{tikzpicture}
+    }
 \end{frame}
+\begin{frame}{Topologisk sortering}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \begin{tikzpicture}
+                \node[shape=circle,draw=black] (1) at (0,2) {1};
+                \node[shape=circle,draw=black] (2) at (2,2) {2};
+                \node[shape=circle,draw=black] (3) at (4,2) {3};
+                \node[shape=circle,draw=black] (4) at (0,0) {4};
+                \node[shape=circle,draw=black] (5) at (2,0) {5};
+                \node[shape=circle,draw=black] (6) at (4,0) {6};
+
+                \path [-{Latex[length=3mm]},width=2] (2) edge node[left] {} (3);
+                \path [-{Latex[length=3mm]},width=2] (2) edge node[left] {} (4);
+                \path [-{Latex[length=3mm]},width=2] (4) edge node[left] {} (1);
+                \path [-{Latex[length=3mm]},width=2] (5) edge node[left] {} (2);
+            \end{tikzpicture}
+        \column{0.5\textwidth}
+            \onslide<2->{Er $6, 5, 2, 3, 4, 1$ en gyldig topologisk sortering?}
+
+            \onslide<5->{\textcolor{green}{Ja!}}
+    \end{columns}
+    \vfill
+    \centering
+    \onslide<3->{
+        \begin{tikzpicture}
+            \node[shape=circle,draw=black] (6) at (0,0) {6};
+            \node[shape=circle,draw=black] (5) at (2,0) {5};
+            \node[shape=circle,draw=black] (2) at (4,0) {2};
+            \node[shape=circle,draw=black] (3) at (6,0) {3};
+            \node[shape=circle,draw=black] (4) at (8,0) {4};
+            \node[shape=circle,draw=black] (1) at (10,0) {1};
+
+            \onslide<4->{
+                \path[-{Latex[length=3mm]},width=2] (2) edge[bend right] node[left] {} (3);
+                \path[-{Latex[length=3mm]},width=2] (2) edge[bend left] node[left] {} (4);
+                \path[-{Latex[length=3mm]},width=2] (4) edge[bend right] node[left] {} (1);
+                \path[-{Latex[length=3mm]},width=2] (5) edge[bend left] node[left] {} (2);
+            }
+        \end{tikzpicture}
+    }
+\end{frame}
+
 
 
 \section{Tips til øving 8, teori}
-\begin{frame}{Tips til øving 8, teori}
+\begin{frame}{Tips 1}
     I denne forelesningen gikk vi gjennom BFS og DFS på urettede grafer.
 
     \pause
 
     De fungerer helt likt med rettede grafer!
 \end{frame}
+\begin{frame}{Tips 2}
+    Kompleksitene som bes om i teoriøvingen finnes i pensumboka og/eller på nettet ...
+
+    \pause
+
+    ... men prøv å forstå hvorfor de er som de er.
+\end{frame}
+\begin{frame}{Tips 3}
+    BFS- og DFS-øvingene spør om hvilken rekkefølge nodene blir \textit{farget svar}.
+
+    \pause
+
+    Ikke i hvilken rekkefølge de først ble besøkt!
+\end{frame}
+\begin{frame}{Tips 4}
+    Kantklassifisering i DFS kan være litt tricky ...
+
+    \pause
+
+    ... men bruk eliminasjonsmetoden.
+\end{frame}
 
 \section{Tips til øving 8, praksis}
+\begin{frame}[fragile]{Oppgave 1}
+    Oppgaven er å implementere \verb|mazetonodelist(maze)|.
 
+    \pause
+
+    Det står allerede en del info i oppgaven, men her kommer enda et eksempel.
+\end{frame}
+\begin{frame}[fragile]{Oppgave 1}
+    \verb|maze = |
+    \vfill
+
+    \alt<2->{\colorlet{cl1}{gray}}{\colorlet{cl1}{block body.bg}}
+
+    \begin{center}
+    \begin{tikzpicture}
+    \matrix [matrix of nodes,row sep=-\pgflinewidth]
+    {
+        ~ & \textcolor{cl1}{1} & \textcolor{cl1}{2} & \textcolor{cl1}{3} & \textcolor{cl1}{4} & \textcolor{cl1}{5} & \textcolor{cl1}{6} & \textcolor{cl1}{7} \\
+        \textcolor{cl1}{1} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        \textcolor{cl1}{2} & 1 & 1 & 0 & 1 & 1 & 1 & 0 \\
+        \textcolor{cl1}{3} & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+        \textcolor{cl1}{4} & 0 & 1 & 0 & 1 & 1 & 1 & 0 \\
+        \textcolor{cl1}{5} & 0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+        \textcolor{cl1}{6} & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\
+        \textcolor{cl1}{7} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    };
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+\begin{frame}[fragile]{Oppgave 1}
+    \verb|maze = |
+    \vfill
+
+    \colorlet{cl1}{gray}
+
+    \begin{center}
+    \begin{tikzpicture}
+    \matrix [matrix of nodes,row sep=-\pgflinewidth]
+    {
+        ~ & \textcolor{cl1}{1} & \textcolor{cl1}{2} & \textcolor{cl1}{3} & \textcolor{cl1}{4} & \textcolor{cl1}{5} & \textcolor{cl1}{6} & \textcolor{cl1}{7} \\
+        \textcolor{cl1}{1} & \node[shape=circle,draw=black] (1) {1}; & \node[shape=circle,draw=black] (1) {1}; & 0 & 0 & 0 & 0 & 0 \\
+        \textcolor{cl1}{2} & 1 & 1 & 0 & 1 & 1 & 1 & 0 \\
+        \textcolor{cl1}{3} & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+        \textcolor{cl1}{4} & 0 & 1 & 0 & 1 & 1 & 1 & 0 \\
+        \textcolor{cl1}{5} & 0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+        \textcolor{cl1}{6} & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\
+        \textcolor{cl1}{7} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    };
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}{bleh}
+\end{frame}
 \end{document}
