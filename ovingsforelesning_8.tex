@@ -165,9 +165,9 @@
                 \begin{array}{c c c c c}
                 0 & 0 & 0 & \alt<3->{1}{0} & 0 \\
                 0 & 0 & \alt<5->{1}{0} & \alt<5->{1}{0} & \alt<5->{1}{0} \\
-                0 & \alt<5->{1}{0} & 0 & 0 & 0 \\
-                \alt<3->{1}{0} & \alt<5->{1}{0} & 0 & 0 & 0 \\
-                0 & \alt<5->{1}{0} & 0 & 0 & 0 \\
+                0 & \alt<7->{1}{0} & 0 & 0 & 0 \\
+                \alt<9->{1}{0} & \alt<9->{1}{0} & 0 & 0 & 0 \\
+                0 & \alt<11->{1}{0} & 0 & 0 & 0 \\
                 \end{array}
                 \right]
                 \end{array}
@@ -477,7 +477,7 @@
     }
 \end{frame}
 
-\begin{frame}{topologisk sortering}
+\begin{frame}{Topologisk sortering}
     \textbf{Men ...}
 
     \pause
@@ -605,12 +605,29 @@
 \end{frame}
 
 \section{Tips til øving 8, praksis}
+\begin{frame}{Øving 8}
+    Overordnet oppgave: Finn korteste vei mellom to punkter i en labyrint.
+
+    \pause
+
+    Deloppgaver:
+
+    \begin{enumerate}
+        \item<3-> Gjør om labyrintrepresentasjonen til en grafrepresentasjon.
+        \item<4-> Kjør BFS på grafen.
+        \item<5-> Regn ut den korteste veien ut ifra BFS-resultatet.
+    \end{enumerate}
+\end{frame}
 \begin{frame}{Tips til øving 8, teori}
     Minst 2 av 3 deloppgaver må være bestått for å bestå øvingen.
 
     \pause
 
-    Hvis du sitter fast på en oppgave, så gå til neste oppgave i mellomtiden.
+    Deloppgavene kan gjøres uavhengig av hverandre.
+
+    \pause
+
+    Hvis du sitter fast på en oppgave anbefales det å gå til neste oppgave i mellomtiden.
 \end{frame}
 \begin{frame}[fragile]{Oppgave 1}
     Oppgaven er å implementere \verb|mazetonodelist(maze)|.
@@ -676,7 +693,7 @@
 
     \pause
 
-    Skal returnere en liste med tupler som utgjør stien fra start til mål.
+    Skal returnere en liste med koordinater som utgjør stien fra start til mål.
 
     \pause
 
