@@ -79,7 +79,7 @@
     Brute-force:
 
     \onslide<2->{
-        \begin{align*}
+        \begin{align}
             \begin{split}
                 1,1,1,1 \rightarrow{}& R = 16
             \end{split}\\
@@ -99,6 +99,33 @@
 \begin{frame}[fragile]{Teorioppgave 10}
     % En optimal løsning kan ikke bestå av 3 staver av lengde 2 siden vi fra eksempelet for n = 5 vet at 4 er verdt mer enn 2 staver av lengde 2. Vi vet også en stav av lengde 4 er mer verdt enn 4 staver av lengde 1 og derfor kan heller ikke 6 staver av lengde 1 være en løsning. Da står vi igjen med de to siste alternativene som begge potensitelt kan være mulige.
     \includegraphics[width=\textwidth]{06t_q10_sol.png}
+\end{frame}
+\begin{frame}{Praksisoppgave 3}
+    Lag en matrise der hver celle inneholder den letteste totalvekten til cellen.
+
+    \vfill
+    \centering
+    \begin{math}
+        \left[
+        \begin{array}{c c c c c}
+           3 & 6 & 8 & 6 & 3 \\
+           7 & 6 & 5 & 7 & 3 \\
+           4 & 10 & 4 & 1 & 6 \\
+           10 & 4 & 3 & 1 & 2 \\
+           6 & 1 & 7 & 3 & 9 \\
+        \end{array}
+        \right]
+        \rightarrow
+        \left[
+        \begin{array}{c c c c c}
+           3 & 6 & 8 & 6 & 3 \\
+           10 & 9 & 11 & 10 & 6 \\
+           13 & 19 & 13 & 7 & 12 \\
+           23 & 17 & 10 & 8 & 9 \\
+           23 & 11 & 15 & 11 & 17 \\
+        \end{array}
+        \right]
+    \end{math}
 \end{frame}
 \begin{frame}[fragile]{Praksisoppgave 3}
     \includegraphics[width=\textwidth]{06p_q3_sol.png}
@@ -523,6 +550,23 @@
             \only<26->{Reverse(farget svart) = $6, 3, 2, 5, 4, 1$ = vår topologiske sortering!}
         \end{alertblock}
     \end{columns}
+    \onslide<27->{
+        \begin{tikzpicture}
+            \node[shape=circle,draw=black] (6) at (0,0) {6};
+            \node[shape=circle,draw=black] (3) at (2,0) {3};
+            \node[shape=circle,draw=black] (2) at (4,0) {2};
+            \node[shape=circle,draw=black] (5) at (6,0) {5};
+            \node[shape=circle,draw=black] (4) at (8,0) {4};
+            \node[shape=circle,draw=black] (1) at (10,0) {1};
+
+            \onslide<28->{
+                \path[-{latex[length=3mm]}] (3) edge[bend left] node[left] {} (2);
+                \path[-{latex[length=3mm]}] (2) edge[bend left] node[left] {} (4);
+                \path[-{latex[length=3mm]}] (2) edge[bend right] node[left] {} (5);
+                \path[-{latex[length=3mm]}] (4) edge[bend left] node[left] {} (1);
+            }
+        \end{tikzpicture}
+    }
 \end{frame}
 
 \begin{frame}{Topologisk sortering}
